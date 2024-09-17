@@ -35,7 +35,7 @@ export type PokemonEvolution = {
   id: number;
   name: string;
   generationId: number;
-  generation: string;
+  generation: string | any;
   types: string[];
   trigger?: string;
   minLevel?: Maybe<number>;
