@@ -70,7 +70,11 @@ export default function EvolutionsPage() {
     return <div key={index}>Loading...</div>;
   }
   if (error) {
-    return <div key={index}>Error: {error}</div>;
+    return (
+      <>
+      <div key={index}>Error: {error}</div>;
+      </>
+    )
   }
   if (Array.isArray(data) && data.length > 0) {
     return data.map((evolution) => (
