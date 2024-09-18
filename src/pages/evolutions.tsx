@@ -64,14 +64,15 @@ export default function EvolutionsPage() {
       <Filter filter={filter} setFilter={setFilter} />
       <hr className="-mx-6 mb-8 hidden lg:block" />
 
-      {results?.map(({ data }) =>
-        data?.map((evolution) => (
-          <PokemonEvolutionChain
-            key={evolution?.map((pokemon) => pokemon?.id)?.join('')}
-            evolution={evolution}
-          />
-        )),
-      )}
+      {results.map(({ data }) =>
+  data?.map((evolution) => (
+    <PokemonEvolutionChain
+      key={evolution.map((pokemon) => pokemon.id).join('')}
+      evolution={evolution}
+    />
+  )) || null // Fallback to null if data is undefined
+)}
+
 
       {results[page].isLoading && (
         <>
