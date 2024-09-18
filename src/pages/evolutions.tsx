@@ -67,7 +67,7 @@ export default function EvolutionsPage() {
       {results?.map(({ data }) =>
         data?.map((evolution) => (
           <PokemonEvolutionChain
-            key={evolution?.map((pokemon) => pokemon?.id).join('')}
+            key={evolution?.map((pokemon) => pokemon?.id)?.join('')}
             evolution={evolution}
           />
         )),
