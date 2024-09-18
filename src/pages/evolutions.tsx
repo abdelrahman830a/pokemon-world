@@ -1,4 +1,4 @@
-import { dehydrate, DehydratedState, useQueries } from '@tanstack/react-query';
+import { dehydrate, DehydratedState, useQueries, QueryFunctionContext } from '@tanstack/react-query';
 import { GetStaticPropsResult } from 'next';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
@@ -14,7 +14,7 @@ import PokemonEvolutionChainShimmer from '@/features/pokemon-evolution/component
 import { getEvolutions, PokemonEvolutionFilter } from './api/pokemons/evolution';
 
 type Result = GetStaticPropsResult<{ dehydratedState: DehydratedState }>;
-type EvolutionData = ReturnType<typeof fetchPokemonEvolution>; // Define the expected data type
+type EvolutionData = ReturnType<typeof fetchPokemonEvolution>;
 
 const INITIAL_FILTER: PokemonEvolutionFilter = { generationId: 0, type: '' };
 
@@ -38,10 +38,10 @@ export default function EvolutionsPage() {
 
   const results = useQueries({
     queries: [...Array(page + 1).keys()].map((idx) => ({
-      queryKey: ['pokemon-evolution', filter, idx],
-      queryFn: fetchPokemonEvolution,
+      queryKey: ['pokemon-evolution', filter, idx] as const, // Type assertion here
+      queryFn: (ctx: QueryFunctionContext) => fetchPokemonEvolution(ctx),
     })),
-  }) as Array<{ data?: EvolutionData; isLoading: boolean; isError: boolean }>; // Explicit typing
+  }) as Array<{ data?: EvolutionData; isLoading: boolean; isError: boolean }>;
 
   const loadMoreRef = useIntersection({
     rootMargin: '560px',
