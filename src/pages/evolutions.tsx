@@ -66,16 +66,17 @@ export default function EvolutionsPage() {
       <hr className="-mx-6 mb-8 hidden lg:block" />
 
       {results.map(({ data, isLoading, error }, index) => {
-  if (isLoading) {
-    return <div key={index}>Loading...</div>;
-  }
   
   if (Array.isArray(data) && data.length > 0) {
-    return data.map((evolution) => (
-      <PokemonEvolutionChain
-        key={evolution.map((pokemon) => pokemon.id).join('')}
-        evolution={evolution}
-      />
+    return data.map((evolutionGroup, idx) => (
+      <div key={idx}>
+        {evolutionGroup.map((pokemon) => (
+          <PokemonEvolutionChain
+            key={pokemon.id} // Use the individual Pokémon id for the key
+            evolution={pokemon}
+          />
+        ))}
+      </div>
     ));
   }
   return <div key={index}>No evolutions found.</div>;
