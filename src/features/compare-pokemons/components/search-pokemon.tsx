@@ -15,7 +15,6 @@ type Props = {
 };
 
 export default function SearchPokemon({ onChange }: Props) {
-  const { pathname, replace } = useRouter();
 
   const { data = [] } = usePokemonNames();
   const [keyword, setKeyword] = useState('');
@@ -28,6 +27,7 @@ export default function SearchPokemon({ onChange }: Props) {
     )
     .slice(0, MAX_SHOWED_POKEMONS);
 
+  const { pathname, replace } = useRouter();
   const pokemons = usePokemonsParam();
   const placeholder =
     pokemons.length > 0
