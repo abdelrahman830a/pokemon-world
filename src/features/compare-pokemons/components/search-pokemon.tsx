@@ -19,6 +19,9 @@ export default function SearchPokemon({ onChange }: Props) {
 
   const { data = [] } = usePokemonNames();
   const [keyword, setKeyword] = useState('');
+
+  console.log('datadatadatadatadatadatadatadatadatadatadatadata', data);
+
   const filteredPokemons = data
     .filter((pokemon) =>
       pokemon.toLowerCase().replace(/\s+/g, '').includes(keyword.toLowerCase().replace(/\s+/g, '')),
