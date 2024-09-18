@@ -67,7 +67,7 @@ export default function EvolutionsPage() {
       {results.map(({ data }) =>
   data?.map((evolution) => (
     <PokemonEvolutionChain
-      key={evolution.map((pokemon) => pokemon.id).join('')}
+      key={evolution ? evolution.map((pokemon) => pokemon.id).join('') : 'fallback-key'}
       evolution={evolution}
     />
   )) || null // Fallback to null if data is undefined
