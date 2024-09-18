@@ -45,6 +45,7 @@ export default function EvolutionsPage() {
       queryFn: fetchPokemonEvolution,
     })),
   });
+  console.log("RESULTSSSSSSSS", results);
 
   const loadMoreRef = useIntersection({
     rootMargin: '560px',
