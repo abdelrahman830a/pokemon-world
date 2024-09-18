@@ -7,7 +7,7 @@ type QueryPokemonEvolutionKey = ['pokemon-evolution', PokemonEvolutionFilter, nu
 
 export const fetchPokemonEvolution = async (
   ctx: QueryFunctionContext<QueryPokemonEvolutionKey>,
-): Promise<PokemonEvolution> => {
+): Promise<PokemonEvolution[]> => {
   const [, { generationId, type }, page] = ctx.queryKey;
 
   const res = await fetch(
