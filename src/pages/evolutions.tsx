@@ -47,7 +47,7 @@ export default function EvolutionsPage() {
 
   const loadMoreRef = useIntersection({
     rootMargin: '560px',
-    onEnter: () => results[page].data!.length === 25 && setPage((prev) => prev + 1),
+    onEnter: () => results[page]?.data!.length === 25 && setPage((prev) => prev + 1),
     enabled: !results[page].isLoading,
   });
 
