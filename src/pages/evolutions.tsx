@@ -37,8 +37,8 @@ export default function EvolutionsPage() {
 
   const results = useQueries({
     queries: [...Array(page + 1).keys()].map((idx) => ({
-      queryKey: any,
-      queryFn: any,
+      queryKey,
+      queryFn,
       // queryKey: ['pokemon-evolution', filter, idx],
       // queryFn: fetchPokemonEvolution,
     })),
