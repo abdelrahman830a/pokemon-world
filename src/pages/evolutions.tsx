@@ -11,7 +11,6 @@ import getQueryClient from '@/config/react-query';
 import Filter from '@/features/pokemon-evolution/components/filter';
 import PokemonEvolutionChain from '@/features/pokemon-evolution/components/pokemon-evolution-chain';
 import PokemonEvolutionChainShimmer from '@/features/pokemon-evolution/components/pokemon-evolution-chain-shimmer';
-import { PokemonEvolution } from '@/types/pokemon';
 
 import { getEvolutions, PokemonEvolutionFilter } from './api/pokemons/evolution';
 
@@ -41,7 +40,7 @@ export default function EvolutionsPage() {
   const results = useQueries({
     // @ts-ignore
     queries: [...Array(page + 1).keys()].map((idx) => ({
-      queryKey: ['pokemon-evolution', filter, idx] as const,
+      queryKey: ['pokemon-evolution', filter, idx],
       queryFn: fetchPokemonEvolution,
     })),
   });
@@ -65,23 +64,14 @@ export default function EvolutionsPage() {
       <Filter filter={filter} setFilter={setFilter} />
       <hr className="-mx-6 mb-8 hidden lg:block" />
 
-      {results.map(({ data, isLoading, error }, index) => {
-  
-  if (Array.isArray(data) && data.length > 0) {
-    return data.map((evolutionGroup, idx) => (
-      <div key={idx}>
-        {evolutionGroup.map((pokemon) => (
+      {results.map(({ data }) =>
+        data?.map((evolution) => (
           <PokemonEvolutionChain
-            key={pokemon.id} // Use the individual Pokémon id for the key
-            evolution={pokemon}
+            key={evolution.map((pokemon) => pokemon.id).join('')}
+            evolution={evolution}
           />
-        ))}
-      </div>
-    ));
-  }
-  return <div key={index}>No evolutions found.</div>;
-})}
-
+        )),
+      )}
 
       {results[page].isLoading && (
         <>
