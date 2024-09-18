@@ -65,14 +65,24 @@ export default function EvolutionsPage() {
       <Filter filter={filter} setFilter={setFilter} />
       <hr className="-mx-6 mb-8 hidden lg:block" />
 
-      {results.map(({ data }) =>
-        data?.map((evolution) => (
-          <PokemonEvolutionChain
-            key={evolution.map((pokemon) => pokemon.id).join('')}
-            evolution={evolution}
-          />
-        )),
-      )}
+      {results.map(({ data, isLoading, error }, index) => {
+  if (isLoading) {
+    return <div key={index}>Loading...</div>;
+  }
+  if (error) {
+    return <div key={index}>Error: {error.message}</div>;
+  }
+  if (Array.isArray(data) && data.length > 0) {
+    return data.map((evolution) => (
+      <PokemonEvolutionChain
+        key={evolution.map((pokemon) => pokemon.id).join('')}
+        evolution={evolution}
+      />
+    ));
+  }
+  return <div key={index}>No evolutions found.</div>;
+})}
+
 
       {results[page].isLoading && (
         <>
