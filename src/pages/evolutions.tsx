@@ -37,10 +37,10 @@ export default function EvolutionsPage() {
   const [filter, setFilter] = useState<PokemonEvolutionFilter>(INITIAL_FILTER);
   const [page, setPage] = useState(0);
 
-  const results = useQueries({
+  const results = useQueries<PokemonEvolution[]>({
     // @ts-ignore
     queries: [...Array(page + 1).keys()].map((idx) => ({
-      queryKey: ['pokemon-evolution', filter, idx],
+      queryKey: ['pokemon-evolution', filter, idx] as const,
       queryFn: fetchPokemonEvolution,
     })),
   });
