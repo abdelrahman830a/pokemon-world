@@ -11,7 +11,7 @@ import getQueryClient from '@/config/react-query';
 import Filter from '@/features/pokemon-evolution/components/filter';
 import PokemonEvolutionChain from '@/features/pokemon-evolution/components/pokemon-evolution-chain';
 import PokemonEvolutionChainShimmer from '@/features/pokemon-evolution/components/pokemon-evolution-chain-shimmer';
-import { getEvolutions, PokemonEvolutionFilter } from './api/pokemons/evolution';
+import { getEvolutions, PokemonEvolutionFilter, QueryPokemonEvolutionKey } from './api/pokemons/evolution';
 
 type Result = GetStaticPropsResult<{ dehydratedState: DehydratedState }>;
 type EvolutionData = ReturnType<typeof fetchPokemonEvolution>;
@@ -38,8 +38,8 @@ export default function EvolutionsPage() {
 
   const results = useQueries({
     queries: [...Array(page + 1).keys()].map((idx) => ({
-      queryKey: ['pokemon-evolution', filter, idx] as const, // Type assertion here
-      queryFn: (ctx: QueryFunctionContext) => fetchPokemonEvolution(ctx),
+      queryKey: ['pokemon-evolution', filter, idx] as QueryPokemonEvolutionKey, // Type assertion for the query key
+      queryFn: (ctx: QueryFunctionContext<QueryPokemonEvolutionKey>) => fetchPokemonEvolution(ctx), // Use specific context type
     })),
   }) as Array<{ data?: EvolutionData; isLoading: boolean; isError: boolean }>;
 
