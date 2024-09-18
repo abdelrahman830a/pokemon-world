@@ -11,8 +11,8 @@ export const fetchPokemonEvolution = async (
   const [, { generationId, type }, page] = ctx.queryKey;
 
   const res = await fetch(
-    `/api/pokemons/evolution?generationId=${generationId}&type=${type}&page=${page}`,
-  );
+  `/api/pokemons/evolution?generationId=${generationId || 0}&type=${type || ''}&page=${page}`
+);
   return res.json();
 };
 
