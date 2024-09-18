@@ -11,6 +11,7 @@ import getQueryClient from '@/config/react-query';
 import Filter from '@/features/pokemon-evolution/components/filter';
 import PokemonEvolutionChain from '@/features/pokemon-evolution/components/pokemon-evolution-chain';
 import PokemonEvolutionChainShimmer from '@/features/pokemon-evolution/components/pokemon-evolution-chain-shimmer';
+import { PokemonEvolution } from '@/types/pokemon';
 
 import { getEvolutions, PokemonEvolutionFilter } from './api/pokemons/evolution';
 
