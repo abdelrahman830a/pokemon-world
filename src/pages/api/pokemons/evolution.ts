@@ -28,11 +28,6 @@ export const getEvolutions = (
 
   const start = LIMIT * page;
   const end = Math.min(start + LIMIT, data.length);
-  
-  // Ensure we don't exceed the length of the data
-  if (start >= data.length) {
-    return []; // Return an empty array if the start index is beyond the data length
-  }
 
   return data.slice(start, end);
 };
