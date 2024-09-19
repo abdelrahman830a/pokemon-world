@@ -8,8 +8,6 @@ export type PokemonEvolutionFilter = {
   type?: string;
 };
 
-const LIMIT = 28;
-
 export const getEvolutions = (
   { generationId, type }: PokemonEvolutionFilter,
   page: number = 0,
@@ -26,9 +24,13 @@ export const getEvolutions = (
     data = data.filter((pokemons) => pokemons.some((pokemon) => pokemon.types.includes(type)));
   }
 
+  // Set LIMIT based on the data length
+  const LIMIT = data.length;
+
   const start = LIMIT * page;
   const end = Math.min(start + LIMIT, data.length);
 
+  // Return the slice of data for the current page
   return data.slice(start, end);
 };
 
