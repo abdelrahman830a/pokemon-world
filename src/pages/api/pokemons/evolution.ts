@@ -8,7 +8,7 @@ export type PokemonEvolutionFilter = {
   type?: string;
 };
 
-const LIMIT = 100;
+const LIMIT = 120;
 
 export const getEvolutions = (
   { generationId, type }: PokemonEvolutionFilter,
@@ -27,7 +27,7 @@ export const getEvolutions = (
   }
 
   const start = LIMIT * page;
-  return data.slice(start, start + LIMIT);
+  return data?.slice(start, start + LIMIT);
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
