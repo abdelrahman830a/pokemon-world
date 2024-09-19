@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+
 import { PokemonEvolution } from '@/types/pokemon';
 import evolutions from '~/generated/pokemon-evolution.json';
 
