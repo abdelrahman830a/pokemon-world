@@ -8,7 +8,7 @@ export type PokemonEvolutionFilter = {
   type?: string;
 };
 
-const LIMIT = 125;
+const LIMIT = 127;
 
 export const getEvolutions = (
   { generationId, type }: PokemonEvolutionFilter,
