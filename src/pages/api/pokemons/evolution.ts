@@ -25,7 +25,8 @@ export const getEvolutions = (
   }
 
   // Set LIMIT based on the data length
-  const LIMIT = 25;
+  const LIMIT = 128;
+  console.log("data LENGTH", data.length);
 
   const start = LIMIT * page;
   const end = Math.min(start + LIMIT, data.length);
