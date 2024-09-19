@@ -8,8 +8,7 @@ export type PokemonEvolutionFilter = {
   type?: string;
 };
 
-const INITIAL_LIMIT = 25;
-const MAX_LIMIT = 128;
+const LIMIT = 128;
 
 export const getEvolutions = (
   { generationId, type }: PokemonEvolutionFilter,
@@ -27,18 +26,8 @@ export const getEvolutions = (
     data = data.filter((pokemons) => pokemons.some((pokemon) => pokemon.types.includes(type)));
   }
 
-  // Calculate the effective limit based on page and maximum limit
-  const limit = Math.min(INITIAL_LIMIT * (page + 1), MAX_LIMIT);
-  
-  const start = 0; // Always start from the beginning of the data
-  const end = limit;
-  
-  // Ensure we don't exceed the length of the data
-  if (start >= data.length) {
-    return []; // Return an empty array if the start index is beyond the data length
-  }
-
-  return data.slice(start, end);
+  const start = LIMIT * page;
+  return data.slice(start, start + LIMIT);
 };
 
 
