@@ -38,7 +38,7 @@ export default function Filter({ filter, setFilter }: Props) {
         className="mx-px h-[38px] flex-grow rounded-md border-x-[12px] border-white bg-white ring-1 ring-gray-200 dark:border-dark-base dark:bg-dark-base dark:ring-dark-light lg:flex-grow-0"
       >
         <option value="0">All generations</option>
-        {data!.generations.map(({ id, name }) => (
+        {data?.generations.map(({ id, name }) => (
           <option key={id} value={id}>
             {name}
           </option>
